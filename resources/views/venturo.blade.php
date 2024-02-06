@@ -63,7 +63,7 @@
                             <tr class="table-dark">
                                 <th rowspan="2" style="text-align:center;vertical-align: middle;width: 250px;">Menu
                                 </th>
-                                <th colspan="12" style="text-align: center;">Periode Pada 2021
+                                <th colspan="12" style="text-align: center;">Periode Pada {{$tahun}}
                                 </th>
                                 <th rowspan="2" style="text-align:center;vertical-align: middle;width:75px">Total
                                 </th>
