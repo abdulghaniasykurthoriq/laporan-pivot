@@ -34,8 +34,8 @@
                             <div class="form-group">
                                 <select id="my-select" class="form-control" name="tahun">
                                     <option value="">Pilih Tahun</option>
-                                    <option value="2021" selected="">2021</option>
-                                    <option value="2022">2022</option>
+                                    <option value="2021" {{ $tahun == 2021 ? 'selected' : ''}}>2021</option>
+                                    <option value="2022" {{ $tahun == 2022 ? 'selected' : ''}} >2022</option>
                                 </select>
                             </div>
                         </div>
