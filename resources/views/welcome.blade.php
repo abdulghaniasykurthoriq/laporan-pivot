@@ -34,7 +34,7 @@ if (isset($_GET['tahun'])) {
                 Venturo - Laporan penjualan tahunan per menu
             </div>
             <div class="card-body">
-                <form id="tahunForm" action="{{ route('transaksi') }}" method="get">
+                <form id="tahunForm" action="{{ route('venturo') }}" method="get">
                     <div class="row">
                         <div class="col-2">
                             <div class="form-group">
@@ -69,7 +69,7 @@ if (isset($_GET['tahun'])) {
                         var selectedValue = this.value; // Mendapatkan nilai tahun yang dipilih
                 
                         // Membuat URL dengan parameter tahun yang dipilih
-                        var url = "{{ route('transaksi') }}?tahun=" + selectedValue;
+                        var url = "{{ route('venturo') }}?tahun=" + selectedValue;
                 
                         // Mengarahkan ke URL yang baru
                         window.location.href = url;
@@ -116,6 +116,7 @@ if (isset($_GET['tahun'])) {
                                              </td>
                                             <td style="text-align: right;">
                                                 {{ isset($menu['January']) ? $menu['January'] : '' }}
+                                                
                                             </td>
                                             <td style="text-align: right;">
                                                 {{ isset($menu['February']) ? $menu['February'] : '' }}

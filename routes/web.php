@@ -14,4 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [TransaksiController::class,'index'])->name('transaksi');
+Route::get('/', function(){
+    return redirect()->route('venturo');
+});
+Route::get('/venturo', [TransaksiController::class,'venturo'])->name('venturo');
+
