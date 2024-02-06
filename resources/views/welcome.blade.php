@@ -110,7 +110,10 @@ if (isset($_GET['tahun'])) {
                                 @foreach ($transaksiPerMenuBulan as $key => $menu)
                                     @if ($item == $key)
                                         <tr>
-                                            <td>{{ $key }} </td>
+                                            <td>
+                                                {{ ucwords(str_replace('_', ' ', $key)) }}
+
+                                             </td>
                                             <td style="text-align: right;">
                                                 {{ isset($menu['January']) ? $menu['January'] : '' }}
                                             </td>
@@ -168,7 +171,9 @@ if (isset($_GET['tahun'])) {
                                 @foreach ($transaksiPerMenuBulan as $key => $menu)
                                     @if ($item == $key)
                                         <tr>
-                                            <td>{{ $key }} </td>
+                                            <td>
+                                                {{ ucwords(str_replace('_', ' ', $key)) }}
+                                             </td>
                                             <td style="text-align: right;">
                                                 {{ isset($menu['January']) ? $menu['January'] : '' }}
                                             </td>
