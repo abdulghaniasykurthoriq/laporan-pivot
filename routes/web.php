@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function(){
-    return redirect()->route('venturo');
+    return redirect()->route('intermediete');
 });
-Route::get('/venturo', [TransaksiController::class,'venturo'])->name('venturo');
+Route::get('/intermediete', [TransaksiController::class,'index'])->name('intermediete');
+Route::get('/advanced', [SekolahController::class,'index'])->name('advanced');
+
 

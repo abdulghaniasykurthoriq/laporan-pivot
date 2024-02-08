@@ -33,9 +33,9 @@
                         <div class="col-2">
                             <div class="form-group">
                                 <select id="my-select" class="form-control" name="tahun">
-                                    <option value="">Pilih Tahun</option>
-                                    <option value="2021" {{ $tahun == 2021 ? 'selected' : ''}}>2021</option>
-                                    <option value="2022" {{ $tahun == 2022 ? 'selected' : ''}} >2022</option>
+                                    <option disabled selected value="">Pilih Tahun</option>
+                                    <option {{ $tahun == 2021 ? 'selected' : '' }} value="2021" >2021</option>
+                                    <option {{ $tahun == 2022 ? 'selected' : '' }} value="2022"  >2022</option>
                                 </select>
                             </div>
                         </div>
@@ -43,6 +43,7 @@
                             <button type="submit" class="btn btn-primary">
                                 Tampilkan
                             </button>
+                @if ($tahun != null)
                             <a href="http://tes-web.landa.id/intermediate/menu" target="_blank" rel="Array Menu"
                                 class="btn btn-secondary">
                                 Json Menu
@@ -52,10 +53,13 @@
                                 Json Transaksi
                             </a>
                             <a href="https://tes-web.landa.id/intermediate/download?path=example.php" class="btn btn-secondary">Download Example</a>
+                            @endif
 
                         </div>
                     </div>
                 </form>
+                @if ($tahun != null)
+                    
                 <hr>
                 <div class="table-responsive">
                     <table class="table table-hover table-bordered" style="margin: 0;">
@@ -63,7 +67,7 @@
                             <tr class="table-dark">
                                 <th rowspan="2" style="text-align:center;vertical-align: middle;width: 250px;">Menu
                                 </th>
-                                <th colspan="12" style="text-align: center;">Periode Pada {{$tahun}}
+                                <th colspan="12" style="text-align: center;">Periode Pada {{ $tahun}}
                                 </th>
                                 <th rowspan="2" style="text-align:center;vertical-align: middle;width:75px">Total
                                 </th>
@@ -89,31 +93,22 @@
                             </tr>
 
 
-                            @foreach ($groupedCategories['makanan'] as $item)
+                            @foreach ($dataReady['makanan'] as $key => $item)
                                 <tr>
-                                    <td>{{ $item['menu'] }}</td>
-                                    @php
-                                        $monthsArray = $item['months']->toArray();
-                                    @endphp
-                                    @if ($monthsArray)
-                                        @foreach ($monthsArray as $total)
-                                            {{-- // perbaiki td disini ada tidak ada pokokny ada 12 --}}
-                                            @if ($total)
-                                            <td style="text-align: right;">{{ number_format($total) }} </td>
-                                                
-                                            @else
-                                            <td style="text-align: right;"> </td>
-                                                
-                                            @endif
-                                        @endforeach
+                                    <td>{{ $key }}</td>
+            
+                                    @foreach ($item as $detail)
+                                    @if ($detail)
+                                    <td style="text-align: right;">{{ number_format($detail) }}</td>
+                                        
                                     @else
-                                        @for ($i = 0; $i < 12; $i++)
-                                            <td style="text-align: right;"> </td>
-                                        @endfor
+                                        <td></td>
                                     @endif
+                                    @endforeach
 
-
-                                    <td style="text-align: right;"><b>{{ number_format(array_sum($monthsArray)) }}</b>
+                                    <td style="text-align: right;"><b>
+                                        {{ number_format(array_sum($item)) }}
+                                    </b>
                                     </td>
                                 </tr>
                             @endforeach
@@ -121,38 +116,29 @@
                             <tr>
                                 <td class="table-secondary" colspan="14"><b>Minuman</b></td>
                             </tr>
-                            @foreach ($groupedCategories['minuman'] as $item)
+                            @foreach ($dataReady['minuman'] as $key => $item)
                                 <tr>
-                                    <td>{{ $item['menu'] }}</td>
-                                    @php
-                                        $monthsArray = $item['months']->toArray();
-                                    @endphp
-                                    @if ($monthsArray)
-                                        @foreach ($monthsArray as $total)
-                                            {{-- // perbaiki td disini ada tidak ada pokokny ada 12 --}}
-                                            @if ($total)
-                                            <td style="text-align: right;">{{ number_format($total) }} </td>
-                                                
-                                            @else
-                                            <td style="text-align: right;"> </td>
-                                                
-                                            @endif
-                                        @endforeach
+                                    <td>{{ $key }}</td>
+            
+                                    @foreach ($item as $detail)
+                                    @if ($detail)
+                                    <td style="text-align: right;">{{ number_format($detail) }}</td>
+                                        
                                     @else
-                                        @for ($i = 0; $i < 12; $i++)
-                                            <td style="text-align: right;"> </td>
-                                        @endfor
+                                        <td></td>
                                     @endif
+                                    @endforeach
 
-
-                                    <td style="text-align: right;"><b>{{ number_format(array_sum($monthsArray)) }}</b>
+                                    <td style="text-align: right;"><b>
+                                        {{ number_format(array_sum($item)) }}
+                                    </b>
                                     </td>
                                 </tr>
                             @endforeach
 
                             <tr class="table-dark">
                                 <td><b>Total</b></td>
-                            @foreach ($transaksiPerBulan as $item)
+                            @foreach ($transaksiPerTahun as $item)
                                 @if ($item)
                                 <td style="text-align: right;">
                                     <b> {{number_format($item)}} </b>
@@ -164,13 +150,16 @@
                                 
                             @endforeach
 
-                                <td style="text-align: right;"><b>{{number_format($totalTransaksiTahunan)}}</b></td>
+                                <td style="text-align: right;"><b>{{number_format(array_sum($transaksiPerTahun))}}</b></td>
+                            
                             </tr>
 
                             
                         </tbody>
                     </table>
                 </div>
+                @endif
+
             </div>
 
             {{-- view json menu hidden --}}
